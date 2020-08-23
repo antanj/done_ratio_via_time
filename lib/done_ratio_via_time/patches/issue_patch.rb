@@ -15,14 +15,31 @@ module DoneRatioViaTime
               user.allowed_to?(:edit_done_ratio_calculation_type, issue.project)
             end)
 
-          alias_method_chain :done_ratio_derived?, :auto_calculation
-          alias_method_chain :done_ratio, :calculation_type
-          alias_method_chain :safe_attributes=, :done_ratio_check
-          alias_method_chain :total_estimated_hours, :relations
-          alias_method_chain :total_spent_hours, :relations
+          # alias_method_chain :done_ratio_derived?, :auto_calculation
+          alias_method :done_ratio_derived_without_auto_calculation?, :done_ratio_derived?
+          alias_method :done_ratio_derived?, :done_ratio_derived_with_auto_calculation?
+
+          # alias_method_chain :done_ratio, :calculation_type
+          alias_method :done_ratio_without_calculation_type, :done_ratio
+          alias_method :done_ratio, :done_ratio_with_calculation_type
+
+          # alias_method_chain :safe_attributes=, :done_ratio_check
+          alias_method :safe_attributes_without_done_ratio_check=, :safe_attributes=
+          alias_method :safe_attributes=, :safe_attributes_with_done_ratio_check=
+
+          # alias_method_chain :total_estimated_hours, :relations
+          alias_method :total_estimated_hours_without_relations, :total_estimated_hours
+          alias_method :total_estimated_hours, :total_estimated_hours_with_relations
+
+
+          # alias_method_chain :total_spent_hours, :relations
+          alias_method :total_spent_hours_without_relations, :total_spent_hours
+          alias_method :total_spent_hours, :total_spent_hours_with_relations
 
           class << self
-            alias_method_chain :use_field_for_done_ratio?, :hide_selector_field
+            # alias_method_chain :use_field_for_done_ratio?, :hide_selector_field
+            alias_method :use_field_for_done_ratio_without_hide_selector_field, :use_field_for_done_ratio?
+            alias_method :use_field_for_done_ratio?, :use_field_for_done_ratio_with_hide_selector_field?
           end
           const_set :CALCULATION_TYPE_DEFAULT, 0
           const_set :CALCULATION_TYPE_MANUAL, 1

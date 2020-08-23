@@ -2,7 +2,7 @@
 # Author: Tecforce
 # Website: http://tecforce.ru
 
-class AddDoneRatioCalculationFieldsToIssues < ActiveRecord::Migration
+class AddDoneRatioCalculationFieldsToIssues < ActiveRecord::Migration[5.2]
   def change
     add_column :issues, :done_ratio_calculation_type, :integer, default: 0,
                                                                 null: false

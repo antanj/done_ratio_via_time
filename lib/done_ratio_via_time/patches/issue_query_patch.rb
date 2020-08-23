@@ -9,8 +9,13 @@ module DoneRatioViaTime
       def self.included(base)
         base.send(:include, InstanceMethods)
         base.class_eval do
-          alias_method_chain :initialize_available_filters, :calculation_type
-          alias_method_chain :available_columns, :calculation_type
+          # alias_method_chain :initialize_available_filters, :calculation_type
+          alias_method :initialize_available_filters_without_calculation_type, :initialize_available_filters
+          alias_method :initialize_available_filters, :initialize_available_filters_with_calculation_type
+
+          # alias_method_chain :available_columns, :calculation_type
+          alias_method :available_columns_without_calculation_type, :available_columns
+          alias_method :available_columns, :available_columns_with_calculation_type
         end
       end
 

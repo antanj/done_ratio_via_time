@@ -9,7 +9,9 @@ module DoneRatioViaTime
         base.send(:include, InstanceMethods)
         base.extend(ClassMethods)
         base.class_eval do
-          alias_method_chain :render_issue_status_by, :new_logic
+          # alias_method_chain :render_issue_status_by, :new_logic
+          alias_method :render_issue_status_by_without_new_logic, :render_issue_status_by
+          alias_method :render_issue_status_by, :render_issue_status_by_with_new_logic
         end
       end
 

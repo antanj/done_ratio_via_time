@@ -2,7 +2,7 @@
 # Author: Tecforce
 # Website: http://tecforce.ru
 
-class AddTotalSpentHoursAndTotalEstimatedHoursToIssues < ActiveRecord::Migration
+class AddTotalSpentHoursAndTotalEstimatedHoursToIssues < ActiveRecord::Migration[5.2]
   def change
     add_column :issues, :total_estimated_hours, :float, default: nil
     add_column :issues, :total_spent_hours, :float, default: nil

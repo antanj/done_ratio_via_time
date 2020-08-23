@@ -11,11 +11,25 @@ module DoneRatioViaTime
         base.class_eval do
           define_method(:render_issue_relations) {} unless base.method_defined?(:render_issue_relations)
 
-          alias_method_chain :show_detail, :done_ratio_calculation_type
-          alias_method_chain(:render_issue_relations, :custom_delete_link)
-          alias_method_chain :render_half_width_custom_fields_rows, :primary_assessment
-          alias_method_chain :issue_spent_hours_details, :done_ratio_calculation_type
-          alias_method_chain :issue_estimated_hours_details, :done_ratio_calculation_type
+          # alias_method_chain :show_detail, :done_ratio_calculation_type
+          alias_method :show_detail_without_done_ratio_calculation_type, :show_detail
+          alias_method :show_detail, :show_detail_with_done_ratio_calculation_type
+
+          # alias_method_chain(:render_issue_relations, :custom_delete_link)
+          alias_method :render_issue_relations_without_custom_delete_link, :render_issue_relations
+          alias_method :render_issue_relations, :render_issue_relations_with_custom_delete_link
+
+          # alias_method_chain :render_half_width_custom_fields_rows, :primary_assessment
+          alias_method :render_half_width_custom_fields_rows_without_primary_assessment, :render_half_width_custom_fields_rows
+          alias_method :render_half_width_custom_fields_rows, :render_half_width_custom_fields_rows_with_primary_assessment
+
+          # alias_method_chain :issue_spent_hours_details, :done_ratio_calculation_type
+          alias_method :issue_spent_hours_details_without_done_ratio_calculation_type, :issue_spent_hours_details
+          alias_method :issue_spent_hours_details, :issue_spent_hours_details_with_done_ratio_calculation_type
+
+          # alias_method_chain :issue_estimated_hours_details, :done_ratio_calculation_type
+          alias_method :issue_estimated_hours_details_without_done_ratio_calculation_type, :issue_estimated_hours_details
+          alias_method :issue_estimated_hours_details, :issue_estimated_hours_details_with_done_ratio_calculation_type
         end
       end
 

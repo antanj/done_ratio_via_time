@@ -8,7 +8,9 @@ module DoneRatioViaTime
       def self.included(base)
         base.send(:include, InstanceMethods)
         base.class_eval do
-          alias_method_chain :module_enabled, :issue_progress
+          # alias_method_chain :module_enabled, :issue_progress
+          alias_method :module_enabled_without_issue_progress, :module_enabled
+          alias_method :module_enabled, :module_enabled_with_issue_progress
           after_commit :perform_recalculation
         end
       end

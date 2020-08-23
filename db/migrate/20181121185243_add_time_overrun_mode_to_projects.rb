@@ -2,7 +2,7 @@
 # Author: Tecforce
 # Website: http://tecforce.ru
 
-class AddTimeOverrunModeToProjects < ActiveRecord::Migration
+class AddTimeOverrunModeToProjects < ActiveRecord::Migration[5.2]
   def change
     add_column :projects, :time_overrun_mode, :boolean
   end

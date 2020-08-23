@@ -10,8 +10,12 @@ module DoneRatioViaTime
         base.send(:include, InstanceMethods)
         base.extend(ClassMethods)
         base.class_eval do
-          alias_method_chain :completed_percent, :new_logic
-          alias_method_chain :closed_percent, :new_logic
+          # alias_method_chain :completed_percent, :new_logic
+          alias_method :completed_percent_without_new_logic, :completed_percent
+          alias_method :completed_percent, :completed_percent_with_new_logic
+          # alias_method_chain :closed_percent, :new_logic
+          alias_method :closed_percent_without_new_logic, :closed_percent
+          alias_method :closed_percent, :closed_percent_with_new_logic
         end
       end
 

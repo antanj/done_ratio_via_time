@@ -7,8 +7,10 @@ module DoneRatioViaTime
     def self.included(base)
       base.send(:include, InstanceMethods)
       base.class_eval do
-        include IssuesExtendHelper
-        alias_method_chain :column_value, :relations
+        # include IssuesExtendHelper
+        # alias_method_chain :column_value, :relations
+        alias_method :column_value_without_relations, :column_value
+        alias_method :column_value, :column_value_with_relations
       end
     end
 
